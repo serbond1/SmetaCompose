@@ -1,4 +1,4 @@
-package com.serbond.smetacompose
+package com.serbond.smetacompose.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
