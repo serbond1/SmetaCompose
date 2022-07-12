@@ -8,4 +8,5 @@ data class Dimensions(
     var height: Double,
     var angleType: String,   // внутренний угол
     var angle: Int,
+    var chord: Double = 0.0
 )
