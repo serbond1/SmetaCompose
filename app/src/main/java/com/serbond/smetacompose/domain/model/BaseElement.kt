@@ -2,14 +2,18 @@ package com.serbond.smetacompose.domain.model
 
 const val FLOOR = "пол"
 const val CEIL = "потолок"
-data class Slab(
+const val WALL = "стена"
+
+
+data class BaseElement(
     val id: Long = 0,
     val roomId: Long,
-    var name: String = "",
-    var type: String = "",
+    val name: String,
+    val type: String,
     var area: Double = 0.0,
     var perimeter: Double = 0.0,
-    var innerAngle: Int = 0,           // кол-во внутренних углов
-    var outerAngle: Int = 0,           // кол-во наружних углов
     var note: String = ""
 )
+
+
+

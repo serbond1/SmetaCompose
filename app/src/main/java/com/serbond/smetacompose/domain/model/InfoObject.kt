@@ -1,7 +1,9 @@
 package com.serbond.smetacompose.domain.model
 
 data class InfoObject(
-    var adress: String = "",
+    val id: Long,
+    val objId: Long,
+    var address: String = "",
     var fio: String = "",
     var tel: String = "",
     var email: String = "",
