@@ -2,7 +2,7 @@ package com.serbond.smetacompose.domain.model
 
 const val FLOOR = "пол"
 const val CEIL = "потолок"
-const val WALL = "стена"
+
 
 
 data class BaseElement(

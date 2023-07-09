@@ -1,8 +1,7 @@
 package com.serbond.smetacompose.domain.model
 
 
-const val INNER = "Внутренний"
-const val OUTER = "Наружный"
+
 data class Dimens(
     val id: Long = 0,
     val elementId: Long,
