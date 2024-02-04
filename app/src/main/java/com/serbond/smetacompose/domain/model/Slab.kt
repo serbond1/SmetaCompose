@@ -1,7 +1,6 @@
 package com.serbond.smetacompose.domain.model
 
-const val FLOOR = "Пол"
-const val CEIL = "Потолок"
+
 
 
 

@@ -1,4 +1,4 @@
-package com.serbond.smetacompose.domain.model
+package com.serbond.smetacompose.domain.model.stair
 const val STAIRWAY_1 = "прямая одномаршевая"
 const val STAIRWAY_2 = "Двухмаршевая Г— образная лестница с забежными ступенями и поворотом на 90º"
 const val STAIRWAY_3 = "Двухмаршевая лестница с забежными ступенями и поворотом на 180º "
@@ -17,9 +17,9 @@ data class Stairway( // лестница
     val id: Long,
     val objId: Long,
     var name: String,
-    var type: String , // тип лестницы
-    var stairs: Int,//кол-во ступеней
-    var platform: Int,//кол-во площадок
+    var type: String, // тип лестницы
+    //var stairs: Int,//кол-во ступеней
+    //var platform: Int,//кол-во площадок
     //var height: Double, //высота
    // var width: Double,//ширина
     var note: String = ""

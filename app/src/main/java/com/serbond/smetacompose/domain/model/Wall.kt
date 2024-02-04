@@ -1,7 +1,6 @@
 package com.serbond.smetacompose.domain.model
 
-const val INNER = "Внутренний"
-const val OUTER = "Наружный"
+
 data class Wall (
     val id: Long = 0,
     val roomId: Long,
