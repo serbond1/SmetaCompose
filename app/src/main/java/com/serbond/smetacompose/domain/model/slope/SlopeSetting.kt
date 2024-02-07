@@ -1,4 +1,4 @@
-package com.serbond.smetacompose.domain.model
+package com.serbond.smetacompose.domain.model.slope
 
 data class SlopeSetting(
     var areaFloorAdd: Boolean = false,

@@ -15,7 +15,7 @@ data class Element(
     var name: String,
     var type: String = "", //тип элемента
     var form: String = "", // форма элемента
-    var arc: Boolean = false,
+    //var arc: Boolean = false,
 //    var area: Double = 0.0,
 //    var perimeter: Double = 0.0,
     var active: Boolean,  //  false - не учитывать action, true - учитывать action
