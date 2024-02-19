@@ -1,4 +1,4 @@
-package com.serbond.smetacompose.domain.smeta
+package com.serbond.smetacompose.domain.model.smeta
 
 import java.util.Date
 

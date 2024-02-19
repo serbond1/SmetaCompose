@@ -1,6 +1,6 @@
-package com.serbond.smetacompose.domain.model.slope
+package com.serbond.smetacompose.domain.model.side_element
 
-data class SlopeSetting(
+data class SideElementSetting(
     var areaFloorAdd: Boolean = false,
     var areaFloorRemove: Boolean = false,
     var areaCellAdd: Boolean = false,

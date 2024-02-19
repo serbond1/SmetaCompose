@@ -1,4 +1,4 @@
-package com.serbond.smetacompose.domain.smeta
+package com.serbond.smetacompose.domain.model.smeta
 
 data class Price(
     val id: Long,
