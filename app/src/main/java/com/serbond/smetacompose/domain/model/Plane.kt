@@ -18,3 +18,9 @@ data class Plane(
     var depth: Double = 0.0,// толщина стены, перекрытия
     var note: String = "",
 )
+
+data class PlaneWithElement(
+    val plane: Plane,
+   // val listSidePlane: List <SidePlane>,
+    val listElementWithSide: List <ElementWithSide>
+)

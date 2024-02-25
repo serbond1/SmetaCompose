@@ -14,5 +14,7 @@ data class Side(
     var corner: Int = 90, //угол
     var cornerType: String = INNER, //тип угла
     var radius: Boolean = false,// если да
-    var horda: Boolean = false
+    var horda: Boolean = false,
 )
+
+
