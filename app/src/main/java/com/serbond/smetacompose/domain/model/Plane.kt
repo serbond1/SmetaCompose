@@ -10,8 +10,9 @@ const val PARTITION = "Перегородка"
 data class Plane(
     val id: Long = 0,
     val roomId: Long,
-    var name: String,
+    val name: String,
     val type: String,
+    val rect: Boolean,
     var active : Boolean = true,
     var area: Double = 0.0,
     var perimeter: Double = 0.0,
@@ -19,8 +20,11 @@ data class Plane(
     var note: String = "",
 )
 
-data class PlaneWithElement(
+data class PlaneWithSide(
     val plane: Plane,
-   // val listSidePlane: List <SidePlane>,
+    val listSide: List<SidePlane>
+)
+data class PlaneWithElement(
+    val planeWithSide: PlaneWithSide,
     val listElementWithSide: List <ElementWithSide>
 )

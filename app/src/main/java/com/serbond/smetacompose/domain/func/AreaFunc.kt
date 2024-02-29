@@ -69,7 +69,7 @@ class AreaFunc {
                         return Math.PI* r.pow(2.0)
                     }
                     SEGMENT -> {
-                        val a = l[0].length
+                        val a = l[0].length // хорда
                         val d = l[1].length // длина дуги
                         val uR = segmentRadian(a, d)
                         val u = Math.toDegrees(uR)

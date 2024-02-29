@@ -11,7 +11,7 @@ class ElementFunc {
             e.listSide.forEach {
                 list.add(it.side)
             }
-            return Round.double2(AreaFunc.areaForm(e.element.form,list))
+            return AreaFunc.areaForm(e.element.form,list)
         }
         fun areaElementActive(e: ElementWithSide): Double{
             return if (e.element.active) {
