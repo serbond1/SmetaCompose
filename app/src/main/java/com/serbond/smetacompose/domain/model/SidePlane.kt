@@ -3,7 +3,7 @@ package com.serbond.smetacompose.domain.model
 const val INNER = "Внутренний"
 const val OUTER = "Наружный"
 data class SidePlane (
-    val id: Long ,
+    val id: Long,
     val planeId: Long,
     val side: Side,
     var height: Boolean = false
