@@ -6,6 +6,13 @@ import com.serbond.smetacompose.domain.model.side_element.SideElement
 
 class ElementFunc {
     companion object{
+//        fun listSideElement(e: ElementWithSide): List<SideElement>{
+//            val list = mutableListOf<Side>()
+//            e.listSide.forEach {
+//                list.add(it.side)
+//            }
+//            return list
+//        }
         fun areaElement(e: ElementWithSide): Double{
             val list = mutableListOf<Side>()
             e.listSide.forEach {

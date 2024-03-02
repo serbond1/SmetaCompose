@@ -1,9 +1,15 @@
 package com.serbond.smetacompose.domain.func
 
+import androidx.compose.runtime.withFrameNanos
+import com.serbond.smetacompose.domain.model.CEIL
+import com.serbond.smetacompose.domain.model.ElementWithSide
+import com.serbond.smetacompose.domain.model.FLOOR
 import com.serbond.smetacompose.domain.model.INNER
 import com.serbond.smetacompose.domain.model.OUTER
+import com.serbond.smetacompose.domain.model.PlaneWithElement
 import com.serbond.smetacompose.domain.model.PlaneWithSide
 import com.serbond.smetacompose.domain.model.Side
+import com.serbond.smetacompose.domain.model.WALL
 
 class PlaneFunc {
     companion object{
@@ -28,6 +34,26 @@ class PlaneFunc {
                 return Point.newArea(Point.newPoint(list) ) + areaSegment
 
             }
+        }
+        fun planeAddElementArea(planeWithElement: PlaneWithElement,listAreaSideAdd: List<ElementWithSide>): Double{
+            var area = areaPlane(planeWithElement.planeWithSide)
+            planeWithElement.listElementWithSide.forEach {
+                area += ElementFunc.areaElementActive(it)
+
+            }
+            listAreaSideAdd.forEach {
+                when (planeWithElement.planeWithSide.plane.type) {
+                    WALL -> {
+                        area += ElementFunc.areaSideAddWall(it.listSide)
+                    }
+                    FLOOR -> area += ElementFunc.areaSideAddFloor(it.listSide)
+                    CEIL -> area += ElementFunc.areaSideAddCeil(it.listSide)
+                }
+
+
+
+            }
+            return area
         }
     }
 }

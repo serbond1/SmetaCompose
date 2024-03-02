@@ -19,6 +19,7 @@ const val NORECT: String = "многоугольник"
 
 class AreaFunc {
         companion object{
+
             fun areaForm (form: String, l: List<Side>): Double{
                 when (form) {
                     TRI1 -> {
@@ -60,7 +61,7 @@ class AreaFunc {
                         val d1 = l[4].length
                         val d2 = l[5].length
                         val p= a+b+c+d
-                        val x= (p/2-a)*(p/2-b)*(p/2-c)*(p/2-d)
+                        val x = (p/2-a)*(p/2-b)*(p/2-c)*(p/2-d)
                         val y= 1/4*(a*c+b*d+d1*d2)*(a*c+b*d-d1*d2)
                         return sqrt(x - y)
                     }

@@ -8,3 +8,7 @@ data class Room(
     var mansard: Boolean,     //  мансарда
     var note: String = ""
 )
+data class RoomWithPlane(
+    val room: Room,
+    val listPlaneWithElement: List<PlaneWithElement>
+)
