@@ -59,7 +59,7 @@ class ElementFunc {
             var area = 0.0
             listSide.forEach {
                 if (it.setting.areaFloorAdd) area += it.side.length * it.width
-                if (it.setting.areaFloorRemove) area -= it.side.length * it.width
+                //if (it.setting.areaFloorRemove) area -= it.side.length * it.width
             }
             return Round.double2(area)
         }
@@ -67,7 +67,7 @@ class ElementFunc {
             var area = 0.0
             listSide.forEach {
                 if (it.setting.areaCellAdd) area += it.side.length * it.width
-                if (it.setting.areaCellRemove) area -= it.side.length * it.width
+                //if (it.setting.areaCellRemove) area -= it.side.length * it.width
             }
             return Round.double2(area)
         }
@@ -75,7 +75,7 @@ class ElementFunc {
             var area = 0.0
             listSide.forEach {
                 if (it.setting.areaWallAdd) area += it.side.length * it.width
-                if (it.setting.areaWallRemove) area -= it.side.length * it.width
+                //if (it.setting.areaWallRemove) area -= it.side.length * it.width
             }
             return Round.double2(area)
         }

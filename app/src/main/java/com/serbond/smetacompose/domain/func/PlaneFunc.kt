@@ -1,57 +1,50 @@
 package com.serbond.smetacompose.domain.func
 
 import androidx.compose.runtime.withFrameNanos
+import com.serbond.smetacompose.domain.model.BLOCK
 import com.serbond.smetacompose.domain.model.CEIL
+import com.serbond.smetacompose.domain.model.DOOR
 import com.serbond.smetacompose.domain.model.ElementWithSide
 import com.serbond.smetacompose.domain.model.FLOOR
 import com.serbond.smetacompose.domain.model.INNER
 import com.serbond.smetacompose.domain.model.OUTER
+import com.serbond.smetacompose.domain.model.PARTITION
 import com.serbond.smetacompose.domain.model.PlaneWithElement
 import com.serbond.smetacompose.domain.model.PlaneWithSide
 import com.serbond.smetacompose.domain.model.Side
 import com.serbond.smetacompose.domain.model.WALL
+import com.serbond.smetacompose.domain.model.WINDOWS
 
 class PlaneFunc {
     companion object{
-        fun areaPlane(planeWithSide: PlaneWithSide): Double{
-
-             if (planeWithSide.plane.rect) {
-                 return Round.double2(planeWithSide.listSide[0].side.length * planeWithSide.listSide[1].side.length)
-            } else {
-                 val list = mutableListOf<Side>()
-                 val listRadiusSide = arrayListOf<Side>()
-                 var action = true
-                 planeWithSide.listSide.forEach {
-                     list.add(it.side)
-                     if (it.side.horda) listRadiusSide.add(it.side)
-                     if (it.side.radius) listRadiusSide.add(it.side)
-                     if (it.side.radius && it.side.cornerType == INNER) action = false
-
-                 }
-                 var areaSegment = 0.0
-                 if (listRadiusSide.isNotEmpty() && action) areaSegment = Round.double2(AreaFunc.areaForm(SEGMENT, listRadiusSide))
-                 else if (listRadiusSide.isNotEmpty() ) areaSegment = - Round.double2(AreaFunc.areaForm(SEGMENT, listRadiusSide))
-                return Point.newArea(Point.newPoint(list) ) + areaSegment
-
-            }
+        fun areaWall(planeWithElement: PlaneWithElement): Double{
+            return areaPlane(planeWithElement)
         }
-        fun planeAddElementArea(planeWithElement: PlaneWithElement,listAreaSideAdd: List<ElementWithSide>): Double{
-            var area = areaPlane(planeWithElement.planeWithSide)
-            planeWithElement.listElementWithSide.forEach {
-                area += ElementFunc.areaElementActive(it)
-
-            }
-            listAreaSideAdd.forEach {
-                when (planeWithElement.planeWithSide.plane.type) {
-                    WALL -> {
-                        area += ElementFunc.areaSideAddWall(it.listSide)
-                    }
-                    FLOOR -> area += ElementFunc.areaSideAddFloor(it.listSide)
-                    CEIL -> area += ElementFunc.areaSideAddCeil(it.listSide)
+        fun areaPartition(planeWithElement: PlaneWithElement): Double{
+            return areaPlane(planeWithElement)*2
+        }
+        fun areaPlane(planeWithElement: PlaneWithElement): Double {
+            var area = 0.0
+            area = if (planeWithElement.planeWithSide.plane.rect) {
+                Round.double2(planeWithElement.planeWithSide.listSide[0].side.length *
+                        planeWithElement.planeWithSide.listSide[1].side.length)
+            } else {
+                val list = mutableListOf<Side>()
+                planeWithElement.planeWithSide.listSide.forEach {
+                    list.add(it.side)
                 }
-
-
-
+                Point.newArea(Point.newPoint(list)) + AreaFunc.addAreaSegment(list)
+            }
+            if (planeWithElement.planeWithSide.plane.type == PARTITION) area *= 2
+            planeWithElement.listElementWithSide.forEach {
+                if (planeWithElement.planeWithSide.plane.type == PARTITION) {
+                              ////////
+                    when (it.element.type) {
+                        DOOR, WINDOWS, BLOCK -> area += ElementFunc.areaElementActive(it)
+                    }
+                }
+                area += ElementFunc.areaElementActive(it)
+                if (planeWithElement.planeWithSide.plane.type == WALL) area += ElementFunc.areaSideAddWall(it.listSide)
             }
             return area
         }

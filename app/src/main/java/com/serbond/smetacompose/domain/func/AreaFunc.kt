@@ -1,6 +1,7 @@
 package com.serbond.smetacompose.domain.func
 
 import com.serbond.smetacompose.domain.model.BLOCK
+import com.serbond.smetacompose.domain.model.INNER
 import com.serbond.smetacompose.domain.model.Side
 import kotlin.math.pow
 import kotlin.math.sin
@@ -72,11 +73,12 @@ class AreaFunc {
                     SEGMENT -> {
                         val a = l[0].length // хорда
                         val d = l[1].length // длина дуги
-                        val uR = segmentRadian(a, d)
-                        val u = Math.toDegrees(uR)
-                        val r = d/uR
-                        val h = r * 2.0 * sin(Math.toRadians(u * 0.25)) * sin(Math.toRadians(u * 0.25))
-                        return (d*r-a*(r-h))/2
+                        return segment(a,d)
+//                        val uR = segmentRadian(a, d)
+//                        val u = Math.toDegrees(uR)
+//                        val r = d/uR
+//                        val h = r * 2.0 * sin(Math.toRadians(u * 0.25)) * sin(Math.toRadians(u * 0.25))
+//                        return (d*r-a*(r-h))/2
                     }
                     SECTOR -> {
                         val r = l[0].length // радиус
@@ -91,14 +93,35 @@ class AreaFunc {
                         return (a*b)-(c*d)
                     }
                     NORECT -> {
-                        return Point.newArea(Point.newPoint(l))
+                        return Point.newArea(Point.newPoint(l)) + addAreaSegment(l)
                     }
 
                 }
 
                 return 0.0
             }
-//            fun tri1(a: Double, c: Double): List<Double>{
+            fun addAreaSegment(l: List<Side>): Double {
+                val listRadiusLength = mutableListOf<Double>()
+                val listHordLength = mutableListOf <Double>()
+                val listCornerType = mutableListOf<String>()
+                l.forEach {
+                    if (it.horda) listHordLength.add(it.length)
+                    if (it.radius) {
+                        listRadiusLength.add(it.length)
+                        listCornerType.add(it.cornerType)
+                    }
+                }
+                var areaSegment = 0.0
+                if (listHordLength.isNotEmpty()) {
+                    for (i in 0..<listHordLength.size){
+                        if (listCornerType[i] == INNER) areaSegment -= Round.double2(AreaFunc.segment(listHordLength[i],listRadiusLength[i]))
+                        else areaSegment += Round.double2(AreaFunc.segment(listHordLength[i],listRadiusLength[i]))
+                    }
+                }
+                return areaSegment
+            }
+
+            //            fun tri1(a: Double, c: Double): List<Double>{
 //                val b= Math.sqrt(Math.pow(c, 2.0) - Math.pow(a, 2.0))
 //                val s= (a*b)/2
 //                val p= a+b+c
@@ -159,18 +182,13 @@ class AreaFunc {
 //                list.add(p)
 //                return list
 //            }
-//            fun segment(a: Double, l: Double): List<Double>{
-//                val uR = segmentRadian(a, l)
-//                val u = Math.toDegrees(uR)
-//                val r = l/uR
-//                val h = r * 2.0 * Math.sin(Math.toRadians(u * 0.25)) * Math.sin(Math.toRadians(u * 0.25))
-//                val s = (l*r-a*(r-h))/2
-//                val p = a+l
-//                val list = arrayListOf<Double>()
-//                list.add(s)
-//                list.add(p)
-//                return list
-//            }
+            fun segment(a: Double, l: Double): Double {
+                val uR = segmentRadian(a, l)
+                val u = Math.toDegrees(uR)
+                val r = l / uR
+                val h = r * 2.0 * sin(Math.toRadians(u * 0.25)) * sin(Math.toRadians(u * 0.25))
+                return (l * r - a * (r - h)) / 2
+            }
 //            fun sector(r: Double, l: Double): List<Double>{
 //                val s = (r*l)/2
 //                val p= r*2+l
