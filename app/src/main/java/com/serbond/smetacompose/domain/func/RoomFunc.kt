@@ -4,6 +4,7 @@ import com.serbond.smetacompose.domain.model.CEIL
 import com.serbond.smetacompose.domain.model.CEIL_MANSARD
 import com.serbond.smetacompose.domain.model.ElementWithSide
 import com.serbond.smetacompose.domain.model.FLOOR
+import com.serbond.smetacompose.domain.model.PARTITION
 import com.serbond.smetacompose.domain.model.RoomWithPlane
 import com.serbond.smetacompose.domain.model.WALL
 
@@ -21,6 +22,9 @@ class RoomFunc {
             var area = 0.0
             roomWithPlane.listPlaneWithElement.forEach {
                 if (it.planeWithSide.plane.type == FLOOR) area += PlaneFunc.areaPlane(it)
+                if (it.planeWithSide.plane.type == PARTITION) {  // вычитание площади перегородки
+                    area -= it.planeWithSide.plane.depth * it.planeWithSide.listSide[0].side.length
+                }
                 it.listElementWithSide.forEach { e ->
                     area += ElementFunc.areaSideAddFloor(e.listSide)
                 }
@@ -31,6 +35,9 @@ class RoomFunc {
             var area = 0.0
             roomWithPlane.listPlaneWithElement.forEach {
                 if (it.planeWithSide.plane.type == CEIL) area += PlaneFunc.areaPlane(it)
+                if (it.planeWithSide.plane.type == PARTITION) {   // вычитание площади перегородки
+                    area -= it.planeWithSide.plane.depth * it.planeWithSide.listSide[0].side.length
+                }
                 it.listElementWithSide.forEach { e ->
                     area += ElementFunc.areaSideAddCeil(e.listSide)
                 }

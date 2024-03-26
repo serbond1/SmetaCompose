@@ -31,5 +31,5 @@ data class ObjWithLevel(
    // @Embedded
     val obj: Obj,
    // @Relation(parentColumn = "id", entityColumn = "objId", entity = RoomObj::class)
-    var room: List<Level>
+    var levelList: List<Level>
 )

@@ -15,7 +15,7 @@ const val STAIRWAY_13 = "Коническая лестница"
 const val STAIRWAY_14 = "Лестница в виде призмы"
 data class Stairway( // лестница
     val id: Long,
-    val objId: Long,
+    val levelId: Long,
     var name: String,
     var type: String, // тип лестницы
     //var stairs: Int,//кол-во ступеней
@@ -24,3 +24,15 @@ data class Stairway( // лестница
    // var width: Double,//ширина
     var note: String = ""
 )
+
+data class StairwayWithStaircase(
+    val stairway: Stairway,
+    var listStairCase: List<StairCaseWithStair>
+)
+
+data class StairCaseWithStair (
+    val stairCase: StairCase,
+    var stairList: List<Stair>
+){
+
+}
